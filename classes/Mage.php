@@ -1,7 +1,7 @@
 <?php 
 namespace classes;
 
-class Mage 
+class Mage extends Character
 {
     private $shield = False;
 
@@ -29,7 +29,7 @@ class Mage
             $status = "{$this->name} lance une boule de feu à {$target->name}! Il reste {$target->getLifePoints()} à {$target->name} !";
         } else if ($this->magicPoints > 0) {
             $atk = $this->magicPoints*1.5;
-            $this->magicPoints = 0
+            $this->magicPoints = 0;
             $target->setLifePoints($atk);
             $status = "{$this->name} lance une boule de feu à {$target->name}! Il reste {$target->getLifePoints()} à {$target->name} !";
         } else {
@@ -42,12 +42,12 @@ class Mage
     private function shield() {
         $this->shield = True;
         $status = "{$this->name} lance un bouclier magique pour se protéger!";
-        return $status
+        return $status;
     }
 
     public function setLifePoints($dmg) {
-        if ($this->shield = False) {
-            $this->lifePoints - round($dmg);
+        if ($this->shield == False) {
+            $this->lifePoints -= round($dmg);
             if ($this->lifePoints < 0) {
                 $this->lifePoints = 0;
             }

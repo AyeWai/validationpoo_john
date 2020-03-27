@@ -9,7 +9,7 @@ class warrior extends Character
         $rand = rand(1, 10);
         if ($rand <= 8 && $this->boost) {
             return $this->sword($target);
-        } else if ($rand > 8) {
+        } else {
             return $this->boost();
         }
     }
@@ -22,7 +22,7 @@ class warrior extends Character
             $attack *= $rand;
             $this->boost = False;
         }
-        $target->setlifePoints();
+        $target->setLifePoints($attack);
         $status = "$this->name attaque {$target->name}! Il reste {$target->getLifePoints()} à {$target->name} !";
         return $status;
     }

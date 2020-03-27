@@ -1,15 +1,18 @@
-
+<?php
 include './classes/autoload.php';
 include './models/Database.php';
 
 session_start();
 
-$characters = Database::getAllCharacter();
+//use \classes\Warrior;
+//use \classes\Mage;
 
-if (isset($_SESSION['fighting'])) {
+$characters = Database::getAllCharacters();
+
+if (isset($_SESSION['fighters'])) {
     $name1 = '\classes\\' . $_SESSION['fighters'][0]['type'];
     $name2 = '\classes\\' . $_SESSION['fighters'][1]['type'];
-    $player1 = new $name1($_SESSION['fighters'][0]['name]);
+    $player1 = new $name1($_SESSION['fighters'][0]['name']);
     $player2 = new $name2($_SESSION['fighters'][1]['name']);
 }
 ?>
@@ -45,7 +48,7 @@ if (isset($_SESSION['fighting'])) {
                         <p>Joueur 2 :</p>
                         <?php foreach ($characters as $character): ?>
                             <li>
-                                <input type="radio" name="player2" value="<?= $character[id] ?>">
+                                <input type="radio" name="player2" value="<?= $character['id'] ?>">
                                 <label for="<?= $character['type'] ?>"><?= $character['type'] ?></label><br>
                             </li>
                         <?php endforeach ?>
@@ -59,7 +62,7 @@ if (isset($_SESSION['fighting'])) {
     </header>
     <main class="flex">
         <div class="fight">
-            <?php if (isset($_SESSION['fighting'])): ?>
+            <?php if (isset($_SESSION['fighters'])): ?>
                 <?php $i = 1 ?>
                 <?php while ($player1->getLifePoints() > 0 && $player2->getLifePoints() > 0): ?>
                     <div class="flex row">
